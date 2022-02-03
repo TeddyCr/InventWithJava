@@ -24,12 +24,14 @@ public class BirthdayParadox {
         // class constructor
     }
 
-    public static List<String> getRandomBirthday(int groupSize) {
+    public static List<String> getRandomBirthday(int groupSize, int minYear, int maxYear) {
         /** Given a group size, this method will return `n` random birthday
          * between 1922-2022 where `n=groupSize`.
          * 
-         * @param  groupSize  the number of random birthday to return
-         * @return            a list of random birthday with format YYYY-MM-DD
+         * @param   groupSize   the number of random birthday to return
+         * @param   minYear     the min year [lower bound]
+         * @param   maxYear     the max year [upper bound]
+         * @return              a list of random birthday with format YYYY-MM-DD
          */
         
         ArrayList<String> birthdays = new ArrayList<>();
@@ -37,7 +39,7 @@ public class BirthdayParadox {
 
         for (int i = 0; i < groupSize; i++) {
             LocalDate baseDate = LocalDate.now();
-            LocalDate baseYear = baseDate.withYear(ThreadLocalRandom.current().nextInt(1922,2022));
+            LocalDate baseYear = baseDate.withYear(ThreadLocalRandom.current().nextInt(minYear, maxYear));
 
             int dayOfYear = ThreadLocalRandom.current().nextInt(1, baseYear.lengthOfYear());
 
@@ -59,7 +61,7 @@ public class BirthdayParadox {
 
     public static void main(String[] args) {
         // main method
-        List<String> bDay = getRandomBirthday(40);
+        List<String> bDay = getRandomBirthday(40, 1960, 2022);
         System.out.println(bDay);
     }
 }
